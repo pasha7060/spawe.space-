@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
   <meta charset="UTF-8" />
@@ -24,7 +25,7 @@
   <div id="content"></div>
 
   <script>
-    const ua = navigator.userAgent  navigator.vendor  window.opera;
+    const ua = navigator.userAgent || navigator.vendor || window.opera;
 
     function isTikTokBrowser() {
       return ua.includes("TikTok") || ua.includes("musical");
@@ -32,7 +33,7 @@
 
     if (isTikTokBrowser()) {
       // Показываем фото
-      document.getElementById("content").innerHTML = <img src="open_browser9.jpg" alt="Open in browser">;
+      document.getElementById("content").innerHTML = `<img src="open_browser9.jpg" alt="Open in browser">`;
     } else {
       // Редирект
       window.location.href = "http://linktr.ee/Tg.katti_cats";
