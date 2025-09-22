@@ -13,9 +13,9 @@
       align-items: center;
       height: 100vh;
     }
-    video {
+    img {
       max-width: 100%;
-      max-height: 100%;
+      height: auto;
       display: block;
     }
   </style>
@@ -27,17 +27,12 @@
     const ua = navigator.userAgent  navigator.vendor  window.opera;
 
     function isTikTokBrowser() {
-      return ua.toLowerCase().includes("tiktok") || ua.toLowerCase().includes("musical");
+      return ua.includes("TikTok") || ua.includes("musical");
     }
 
     if (isTikTokBrowser()) {
-      // Показываем видео
-      document.getElementById("content").innerHTML = 
-        <video autoplay muted loop playsinline>
-          <source src="open_browser(1).mp4" type="video/mp4">
-          Ваш браузер не поддерживает видео.
-        </video>
-      ;
+      // Показываем фото
+      document.getElementById("content").innerHTML = <img src="open_browser9.jpg" alt="Open in browser">;
     } else {
       // Редирект
       window.location.href = "http://linktr.ee/Tg.katti_cats";
