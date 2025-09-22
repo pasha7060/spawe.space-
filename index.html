@@ -2,41 +2,75 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Open in browser</title>
   <style>
-    body {
+    html, body {
+      height: 100%;
       margin: 0;
-      padding: 0;
-      background: #000;
+    }
+    body {
+      position: relative;
+      background: #000 url("open_browser9.jpg") no-repeat center center;
+      background-size: cover; /* картинка всегда на весь экран */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: Arial, Helvetica, sans-serif;
+      color: #fff;
+      -webkit-font-smoothing: antialiased;
+      -webkit-text-size-adjust: 100%;
+      overflow: hidden;
+    }
+
+    /* подсказка сверху/снизу (необязательно) */
+    .overlay {
+      position: absolute;
+      left: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
       display: flex;
       justify-content: center;
-      align-items: center;
-      height: 100vh;
+      align-items: flex-end;
+      padding: 5vh 6vw;
+      pointer-events: none; /* чтобы нажатия не мешали (и не было кликабельных элементов) */
+      text-align: center;
     }
-    img {
-      max-width: 100%;
-      height: auto;
-      display: block;
+    .hint {
+      background: rgba(0,0,0,0.45);
+      color: #fff;
+      padding: 10px 14px;
+      border-radius: 10px;
+      font-size: 14px;
+      line-height: 1.2;
+      pointer-events: none;
+      max-width: 90%;
     }
+
+    /* если хочешь убрать подсказку — просто удаляй блок .overlay из body */
   </style>
 </head>
 <body>
-  <div id="content"></div>
+  <!-- Подсказка: можно убрать, если не нужна -->
+  <div class="overlay">
+    <div class="hint">Откройте ссылку в браузере (••• → Open in Browser)</div>
+  </div>
 
   <script>
-    const ua = navigator.userAgent || navigator.vendor || window.opera;
+    (function () {
+      var ua = navigator.userAgent  navigator.vendor  window.opera || "";
+      var isTikTok = /tiktok|musical/i.test(ua);
+      // Ссылка, куда редиректить вне TikTok — меняй при необходимости
+      var targetUrl = "http://linktr.ee/Tg.katti_cats";
 
-    function isTikTokBrowser() {
-      return ua.includes("TikTok") || ua.includes("musical");
-    }
-
-    if (isTikTokBrowser()) {
-      // Показываем фото
-      document.getElementById("content").innerHTML = `<img src="open_browser9.jpg" alt="Open in browser">`;
-    } else {
-      // Редирект
-      window.location.href = "http://linktr.ee/Tg.katti_cats";
-    }
+      if (!isTikTok) {
+        // На обычном браузере — редирект
+        // replace() чтобы не добавлять эту страницу в историю
+        window.location.replace(targetUrl);
+      }
+      // Если isTikTok == true — ничего не делаем: показываем фон (open_browser9.jpg)
+    })();
   </script>
 </body>
 </html>
